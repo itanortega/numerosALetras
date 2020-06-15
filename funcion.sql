@@ -84,11 +84,10 @@ BEGIN
 		grupo3 = substr(tmpNumero, 7, 3)::numeric;
 		grupo4 = substr(tmpNumero, 10, 3)::numeric;
 		
-		IF grupo1 <> 0 THEN
+		IF grupo1 = 1 THEN
+				resultado = resultado || ' MIL';
+		ELSEIF grupo1 <> 0 THEN
 			resultado = resultado || n_l_3digitos(grupo1) || ' MIL';
-			IF substr(resultado, 1, 7) = ' UN MIL' THEN
-				resultado = substr(resultado, 5);
-			END IF;
 		END IF;
 		
 		IF grupo1 <> 0 AND grupo2 = 0 THEN
@@ -99,11 +98,10 @@ BEGIN
 			resultado = resultado || n_l_3digitos(grupo2) || ' MILLONES';
 		END IF;
 		
-		IF grupo3 <> 0 THEN
+		IF grupo3 = 1 THEN
+				resultado = resultado || ' MIL';
+		ELSEIF grupo3 <> 0 THEN
 			resultado = resultado || n_l_3digitos(grupo3) || ' MIL';
-			IF grupo3 = 1 THEN
-				resultado = substr(resultado, 5);
-			END IF;
 		END IF;
 		
 		IF grupo4 <> 0 THEN
@@ -150,7 +148,7 @@ BEGIN
 		
 		IF decimales > 0 THEN
 			IF decimales = 1 THEN
-				resultado = resultado || ' UN CENTAVO';
+				resultado = resultado || ' CON UN CENTAVO';
 			ELSE
 				SELECT INTO tmpD numtolet_convertir(decimales);
 				resultado = resultado || ' CON ' || tmpD || ' CENTAVOS';		
@@ -164,4 +162,4 @@ $BODY$
   COST 100;
 
 -- llamada final
-select convertir_numeros_a_letras(1325000.01)
+select convertir_numeros_a_letras(200101000)
