@@ -150,7 +150,7 @@ BEGIN
 		
 		IF decimales > 0 THEN
 			IF decimales = 1 THEN
-				resultado = resultado || 'UN CENTAVO';
+				resultado = resultado || ' UN CENTAVO';
 			ELSE
 				SELECT INTO tmpD numtolet_convertir(decimales);
 				resultado = resultado || ' CON ' || tmpD || ' CENTAVOS';		
@@ -164,4 +164,4 @@ $BODY$
   COST 100;
 
 -- llamada final
-select convertir_numeros_a_letras(1325000)
+select convertir_numeros_a_letras(1325000.01)
